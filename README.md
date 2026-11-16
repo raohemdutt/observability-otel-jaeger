@@ -26,6 +26,8 @@ curl http://localhost:3000/todo/42   # 404
 - `index.js`: Express server that seeds MongoDB and serves `GET /todo` and `GET /todo/:id`
 - `tracing.js`: OpenTelemetry Node SDK setup. Traces go to Jaeger (OTLP/HTTP on port 4318) and metrics print to the console
 
+Changes from the provided starter code: `tracing.js` uses the OTLP exporter and relies on `getNodeAutoInstrumentations()` alone, because it already includes the HTTP, Express and MongoDB instrumentations. `index.js` clears the seed data on startup so restarts don't create duplicates, and returns 404 for unknown ids.
+
 ## Screenshots
 
 | Search | Request trace |
